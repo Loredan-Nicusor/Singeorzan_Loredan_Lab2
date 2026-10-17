@@ -1,0 +1,13 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace Singeorzan_Loredan_Lab2.Pages
+{
+    public class PrivacyModel : PageModel
+    {
+        public void OnGet()
+        {
+        }
+    }
+
+}

@@ -1,0 +1,24 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Singeorzan_Loredan_Lab2.Models;
+
+namespace Singeorzan_Loredan_Lab2.Pages.PublisherPages;
+
+public class IndexModel : PageModel
+{
+    private readonly Singeorzan_Loredan_Lab2Context _context;
+
+    public IndexModel(Singeorzan_Loredan_Lab2Context context)
+    {
+        _context = context;
+    }
+
+    public IList<Publisher> Publisher { get; set; } = default!;
+
+    public async Task OnGetAsync()
+    {
+        Publisher = await _context.Publisher.ToListAsync();
+
+    }
+}
