@@ -1,4 +1,4 @@
-@page
+@page "/"
 @model Singeorzan_Loredan_Lab2.Pages.BookPages.IndexModel
 
 @{
@@ -23,18 +23,26 @@
                 @Html.DisplayNameFor(model => model.Book[0].PublishingDate)
             </th>
             <th>
-                Publisher Name
+                @Html.DisplayNameFor(model => model.Book[0].Publisher.PublisherName)
             </th>
             <th>
-                Author Name
+                @Html.DisplayNameFor(model => model.Book[0].Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].BookCategories)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Book)
+        @foreach (var item in Model.BookD.Books)
         {
-            <tr>
+            string selectedRow = "";
+            if (item.ID == Model.BookID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
@@ -48,7 +56,22 @@
                     @Html.DisplayFor(modelItem => item.Publisher!.PublisherName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Author!.LastName)
+                    @if (item.Author != null)
+                    {
+                        @($"{item.Author.FirstName} {item.Author.LastName}")
+                    }
+                </td>
+                <td>
+                    @{
+                        if (item.BookCategories != null)
+                        {
+                            foreach (var category in item.BookCategories)
+                            {
+                                @category.Category.ID
+                                @: @category.Category.CategoryName <br />
+                            }
+                        }
+                    }
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
