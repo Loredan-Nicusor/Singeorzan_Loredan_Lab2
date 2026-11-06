@@ -1,8 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Singeorzan_Loredan_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Singeorzan_Loredan_Lab2Context' not found.");
 
 builder.Services.AddDbContext<Singeorzan_Loredan_Lab2Context>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Singeorzan_Loredan_Lab2Context>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
